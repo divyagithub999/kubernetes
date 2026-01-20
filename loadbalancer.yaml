@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-loadbalancer-service
+  labels:
+    app: my-cluloadbalancersterip
+spec:
+  type: LoadBalancer
+  selector:
+    app: my-loadbalancer
+  ports:
+    - port: 80
+      targetPort: 8080
+
+# Internet
+#    ↓
+# Cloud Load Balancer
+#    ↓
+# Service (VIP)
+#    ↓
+# Pods (8080)
+
+# LoadBalancer service requires a cloud provider’s load balancer. In local or bare-metal clusters, the service remains in pending state unless a metalLB or similar solution is installed.
+
+# 🔑 Golden Rules (Must remember)
+
+# ✔ ClusterIP → internal traffic
+# ✔ NodePort → node level exposure
+# ✔ LoadBalancer → cloud only
+# ✔ Ingress → production HTTP routing

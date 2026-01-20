@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app-deployment
+  labels:
+    app: my-app
+    type: production
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-app
+      type: production
+  template:
+    metadata:
+      labels:
+        app: my-app
+        type: production
+    spec:
+      containers:
+        - name: my-app-container
+          image: my-app-container:latest
+          ports:
+            - containerPort: 80
+
+
+# Deployment
+#  └─ spec
+#      ├─ replicas
+#      ├─ selector
+#      └─ template
+#          ├─ metadata
+#          │   └─ labels
+#          └─ spec
+#              └─ containers
+
+# The template defines the Pod specification that the Deployment uses to create and manage replicas. Any change in the template triggers a rollout.
+# 🔑 Golden rules (write these down)
+
+# ✔ template is always under spec
+# ✔ containers is always under template.spec
+# ✔ selector.matchLabels must equal template.metadata.labels
+# ✔ Containers use containerPort, Services use port

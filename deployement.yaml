@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app-deployment
+  labels:
+    app: my-app
+    environment: production
+
+spec:
+  replicas: 3
+
+  selector:
+    matchLabels:
+      app: my-app
+      environment: production
+
+  template:
+    metadata:
+      labels:
+        app: my-app
+        environment: production
+    spec:
+      containers:
+        - name: my-app-container
+          image: my-app-image:latest
+          ports:
+            - containerPort: 80
+
+#kubectl rollout status deployment/my-app-deployment
+#kubectl rollout history deployment/my-app-deployment 

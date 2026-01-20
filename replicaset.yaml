@@ -1,0 +1,29 @@
+# create 3 pods at a time
+
+apiVersion: v1
+kind: replicaSet
+metadata:
+ name: frontened
+labels:
+ app: my-app
+ type: frontened
+spec:
+ replicas: 3
+ selector:
+  matchLabels:
+   app: my-app
+   type: frontened
+ template:
+  metadata:
+   labels:
+    app: my-app
+    type: frontened
+  spec:
+   containers:
+    - name: my-app-container
+      image: my-app-image:latest
+
+#kubectl apply -f replicaset.yaml
+#kubectl get replicasets
+#kubectl describle replicasets frontened
+#kubectl get replicatset -o wide 

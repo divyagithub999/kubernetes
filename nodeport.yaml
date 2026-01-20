@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-app-service
+  labels:
+    app: my-service
+spec:
+  type: NodePort
+  selector:
+    app: my-service
+  ports:
+    - port: 80
+      targetPort: 8080
+      nodePort: 30080
+
+#  User → NodeIP:30080
+#       → Service
+#       → Pod (label: app=my-service)
+#       → Container:8080
+#A Kubernetes Service does not define containers or templates. It must use selectors to route traffic to Pods, define ports as a list, specify the service type, and follow correct YAML indentation
+
+# | Resource    | Creates Pods? |
+# | ----------- | ------------- |
+# | Pod         | ✅             |
+# | Deployment  | ✅             |
+# | StatefulSet | ✅             |
+# | **Service** | ❌             |
+
+# Service NEVER creates pods
+
+# 👉 A Service selects existing Pods using labels

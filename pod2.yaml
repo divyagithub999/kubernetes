@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+ name: my-app-pod
+ labels:
+  app: my-app-pod
+  type: frontened
+  environment: production
+spec:
+ containers:
+  - name: my-app-container
+    image: my-app-image:latest
+
+ #manifest file to create pod
+ #kubectl apply -f pod2.yaml
+ #kubectl get pods
+ #kubectl describe pod my-app-pod (description of pod)
+ #kubectl get pods -o wide   
