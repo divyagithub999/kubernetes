@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-one
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx:latest
+      ports:
+    - containerPort: 80
+    - name: busy-box-container
+      image: busy-box:latest
+      command:
+        [
+          "sh",
+          "-c",
+          "while true; do wget -q0 http:localhost:80; sleep 10; done",
+        ]
+#kubectl apply -f one-pod.yml
+#kubectl get pods
+#kubectl logs -f one-pod -c busybox-container
+#kubectl port-forward pod/pod-one 8081:80
+
+#fetch the IP address of pod two
+#kubectl describe pod one-pod
+#192.168.54.165
+
+#kubectl exec -it one-pod -c nginx-container -- /bin/bash
+#curl 192.168.55.9 (pod two)

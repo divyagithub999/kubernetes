@@ -1,0 +1,14 @@
+# go to ec2 instance->create cluster +Node group ->connect with cluster then apply yaml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sample-pod
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx:latest
+      ports:
+        - containerport: 80
+#kubectl apply -f pod.yaml
+#kubectl get pod
